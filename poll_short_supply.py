@@ -12,9 +12,9 @@ import mp3play
 
 # today_path = datetime.datetime.now().strftime('%Y-%m-%d')
 today_path =time.strftime('%Y-%m-%d')
-disk_short_supply_path = 'D:\\short_supply_pictures'
-disk_normal_supply_path = 'D:\\normal_supply_pictures'
-work_path = 'D:\\short_supply_pictures\\' + today_path
+disk_short_supply_path = 'C:\\short_supply_pictures'
+disk_normal_supply_path = 'C:\\normal_supply_pictures'
+work_path = 'C:\\short_supply_pictures\\' + today_path
 def check_null_dir(dirr):
     if not os.path.exists(work_path):
         # print '今天还没有可用的目录!',time.strftime('%Y-%m-%d %H:%M:%S')
@@ -28,7 +28,7 @@ def check_null_dir(dirr):
         if  os.listdir(dirr):
             if dirr.count('\\')!=2:
                 # print '非空目录:', dirr + '缺货', time.strftime('%Y-%m-%d %H:%M:%S')
-                filename = 'D:\\message.mp3'
+                filename = 'C:\\message.mp3'
                 mp3 = mp3play.load(filename)
                 mp3.play()
                 len = mp3.seconds()
