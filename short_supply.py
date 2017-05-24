@@ -21,10 +21,10 @@ def get_file():
     JP_Pattern = re.compile(u'[\u3040-\u31fe]+')
     if filename:
         newFile = filename.split('/')[-1].split('.')[0]
-        if not os.path.exists('D:\\short_supply_pictures\\' + today_path+'\\'+ newFile):
-            os.makedirs('D:\\short_supply_pictures\\' + today_path+'\\'+ newFile)
-        if not os.path.exists('D:\\normal_supply_pictures\\' + today_path+'\\'+ newFile):
-            os.makedirs('D:\\normal_supply_pictures\\' + today_path+'\\'+ newFile)
+        if not os.path.exists('C:\\short_supply_pictures\\' + today_path+'\\'+ newFile):
+            os.makedirs('C:\\short_supply_pictures\\' + today_path+'\\'+ newFile)
+        if not os.path.exists('C:\\normal_supply_pictures\\' + today_path+'\\'+ newFile):
+            os.makedirs('C:\\normal_supply_pictures\\' + today_path+'\\'+ newFile)
         CN_Match = CN_Pattern.search(filename)
         JP_Match = JP_Pattern.search(filename)
         if CN_Match:
@@ -47,7 +47,7 @@ def get_file():
         while rval:  # 循环读取视频帧
             rval, frame = vc.read()
             if (pic % timeF == 5):
-                body_cascade = cv2.CascadeClassifier('D:\\OpenCV2.4.9\\opencv\\sources\\data\\haarcascades\\test_short_supply.xml')
+                body_cascade = cv2.CascadeClassifier('C:\\OpenCV2.4.9\\opencv\\sources\\data\\haarcascades\\test_short_supply.xml')
                 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
                 bodys = body_cascade.detectMultiScale(gray,1.1,20,cv2.CASCADE_SCALE_IMAGE, (55, 55))
                 flag = False
@@ -55,10 +55,10 @@ def get_file():
                     cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
                     flag = True
                 if flag == True:
-                    cv2.imwrite('D:\\short_supply_pictures\\' + today_path+'\\'+ newFile+'\\' + str(c) + '.jpg', frame)  # 保存
+                    cv2.imwrite('C:\\short_supply_pictures\\' + today_path+'\\'+ newFile+'\\' + str(c) + '.jpg', frame)  # 保存
                     right_count += 1
                 else:
-                    cv2.imwrite('D:\\normal_supply_pictures\\' + today_path + '\\'+ newFile + '\\' + str(c) + '.jpg',frame)  # 保存
+                    cv2.imwrite('C:\\normal_supply_pictures\\' + today_path + '\\'+ newFile + '\\' + str(c) + '.jpg',frame)  # 保存
                     wrong_cont += 1
                 c += 1
             pic = pic + 1
@@ -69,10 +69,10 @@ def get_file():
 
     if right_count>0:
         tkMessageBox.showinfo("提示","视频"+str(filename)+"中存在缺货的货架!\r\n"
-                              +"截图所在路径D:\\short_supply_pictures\\"+ today_path+"\\"+newFile+"\r\n")
+                              +"截图所在路径C:\\short_supply_pictures\\"+ today_path+"\\"+newFile+"\r\n")
     else:
         tkMessageBox.showinfo("提示", "视频"+str(filename) + "中未发现缺货的货架!\r\n"
-                              +"截图所在路径D:\\normal_supply_pictures\\" + today_path+"\\"+newFile+"\r\n")
+                              +"截图所在路径C:\\normal_supply_pictures\\" + today_path+"\\"+newFile+"\r\n")
 root = Tk()
 root.title('缺货监测')
 button2 = Button(root, text="点此上传视频", command=get_file,width=20,height=10)
